@@ -40,8 +40,8 @@ static void wg_packet_send_handshake_initiation(struct wg_peer *peer)
 		atomic64_set(&peer->last_sent_handshake,
 			     ktime_get_coarse_boottime_ns());
 		wg_socket_send_buffer_to_peer(peer, &packet, sizeof(packet),
-					      HANDSHAKE_DSCP);
-		wg_timers_handshake_initiated(peer);
+					      HANDSHAKE_DSCP);	// sgniws: 发送了packet？
+		wg_timers_handshake_initiated(peer);// 在发送完数据包后调用该函数。
 	}
 }
 

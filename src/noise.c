@@ -587,14 +587,14 @@ wg_noise_handshake_create_initiation(struct message_handshake_initiation *dst,
                         handshake->static_identity->tprf_k1,
                         handshake->static_identity->tprf_k2);
         
-        // create ephemeral key pair ****************3.31 to here
+        // create ephemeral key pair 	***AT 3.31 sgniws: 这也许是CPAKEM.GEN----Alg2->1***
         indcpa_kem_keypair(dst->ephemeral_public, handshake->eph_sk, seed,
                            coin, &handshake->eph_buf);
 	// mix ephemeral pk into chaining key and hash
 	message_ephemeral(dst->ephemeral_public, handshake->chaining_key,
                           handshake->hash);
 
-        // encapsulate a fresh secret with static McEliece pk of the peer
+        // encapsulate a fresh secret with static McEliece pk of the peer	sgniws: 这也许是CCAKEM.Enc----Alg2->4
 	if (crypto_kem_mceliece_enc(dst->mc_ciphertext, key,
                                     handshake->remote_mc_pk,
                                     handshake->static_identity->tprf_k1,
